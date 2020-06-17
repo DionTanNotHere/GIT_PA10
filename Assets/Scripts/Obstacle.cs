@@ -6,6 +6,7 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour
 {
     [SerializeField] private float Speed = 3;
+    private bool Pass = true;
 
     void Update()
     {
@@ -13,5 +14,12 @@ public class Obstacle : MonoBehaviour
             Destroy(gameObject);
         else
             transform.Translate(Vector3.right * Time.deltaTime * -Speed);
+
+        if (transform.position.x < 0 && Pass == true)
+        {
+            GameManager.thisManager.ScorePlus();
+            Pass = false;
+        }
     }
+
 }
